@@ -27,7 +27,7 @@ module.exports = {
           span: '#7B96B2',
           border: '#1C2F41',
           post: '#112131',
-          profile: '#0B96B2',
+          profile: '#0B1B2B',
         },
       },
       borderRadius: {

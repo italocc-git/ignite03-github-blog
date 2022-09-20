@@ -6,7 +6,7 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export function Link({children, ...rest}: Props) {
   return (
-    <a {...rest} className='font-bold text-xs uppercase text-product-blue font-nunito hover:underline '>
+    <a {...rest} className='flex items-center gap-2 font-bold text-xs uppercase text-product-blue font-nunito hover:underline cursor-pointer '>
       {children}
     </a>
   );

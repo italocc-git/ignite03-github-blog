@@ -1,13 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {faCalendar} from '@fortawesome/free-regular-svg-icons'
-
+import { BrowserRouter } from 'react-router-dom'
+import { Routes } from './Routes'
 function App() {
 
   return (
-    <div >
-      Github-Blog
-      <FontAwesomeIcon icon={faCalendar}/>
-    </div>
+      <BrowserRouter>
+        <Routes/>
+      </BrowserRouter>
   )
 }
 
