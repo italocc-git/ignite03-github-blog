@@ -1,19 +1,49 @@
 import { PostTitle } from "../components/PostTitle";
-
+import {useParams} from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { api } from "../services/api";
+import ReactMarkdown from 'react-markdown'
+interface IssueProps {
+    title: string;
+    body: string;
+    html_url: string;
+    comments: number;
+    created_at: string;
+    user?: {
+        login: string;
+    },
+}
 export function Post() {
+
+    const {id} = useParams()
+    const [issue, setIssue] = useState<IssueProps>({} as IssueProps)
+    
+    useEffect(() => {
+
+        async function loadIssueById() {
+            if(id){
+                const response = await api.get(`repos/italocc-git/ignite03-github-blog/issues/${id}`)
+                setIssue(response.data)
+            }
+        }
+
+        loadIssueById()
+
+    },[id])
     return(
         <div className='flex flex-col items-center '>
             
             <div className='absolute top-[208px] w-full max-w-[864px] '>
-                    <PostTitle/>
+                    <PostTitle title={issue.title} url={issue.html_url} user={issue.user?.login}
+                    comments={issue.comments} createdAt={issue.created_at}/>
 
-                    <div className='w-full max-w-[864px] px-[40px] py-8 font-nunito'>
-                        <span className="text-justify text-base-text leading-[160%]">
-                            Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.
-                            Dynamic typing
-                            JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types:
-                    
-                        </span>
+                    <div className='w-full max-w-[864px] px-[40px] py-8 font-nunito text-justify'>
+                       
+                        <ReactMarkdown skipHtml>
+                            {issue.body}
+                        </ReactMarkdown>
+                            
+                     
                     </div>
             </div>
 
